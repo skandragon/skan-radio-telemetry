@@ -11,12 +11,7 @@ local wire_colors =
 
 local function init_global()
     if not global.skan_wireless_signals then
-        if not global.skan_wireless_signals then
-            global.skan_wireless_signals = {transmitters = {}, receivers = {}} -- set the new save up with empty global lists
-        else
-            global.skan_wireless_signals = {transmitters = {}, receivers = {}}
-            global.wireless_signals = nil
-        end
+        global.skan_wireless_signals = {transmitters = {}, receivers = {}}
     end
 end
 
@@ -39,32 +34,32 @@ end
 
 local function near(transmitter, receiver)
     if transmitter.range == 0 then return true end
-    return transmitter.range >= math.sqrt((receiver.receiver.position.x - transmitter.transmitter.position.x) ^ 2
-                                          + (receiver.receiver.position.y - transmitter.transmitter.position.y) ^ 2)
+    return transmitter.range >= math.sqrt((receiver.entity.position.x - transmitter.entity.position.x) ^ 2
+                                          + (receiver.entity.position.y - transmitter.entity.position.y) ^ 2)
 end
 
 -- returns a list of transmitters that the receiver is in range of
 local function findTransmittersInRange(receiver)
     local in_range = {}
     for k, transmitter in pairs(global.skan_wireless_signals.transmitters) do
-        if transmitter.transmitter.valid and near(transmitter, receiver) then
+        if transmitter.entity.valid and near(transmitter, receiver) then
             table.insert(in_range, transmitter)
         end
     end
     return in_range
 end
 
-local tickFrequency = 60 -- check tickFrequency/60 times per second
+local tickFrequency = 60 / updatesPerSecond -- check tickFrequency/60 times per second
 
 local function onTick(event)
     if ((event.tick % tickFrequency) ~= 0) then return end
 
     for k, transmitter in pairs(global.skan_wireless_signals.transmitters) do -- update transmitters
-        if transmitter.transmitter.valid then
-            if transmitter.transmitter.energy > 0 then -- transmitters only work when powered
+        if transmitter.entity.valid then
+            if transmitter.entity.energy > 0 then -- transmitters only work when powered
                 local active_signals = {}
                 for i = 1, #wire_colors do -- check both red and green wires
-                    local c = transmitter.transmitter.get_circuit_network(wire_colors[i])
+                    local c = transmitter.entity.get_circuit_network(wire_colors[i])
                     if c then
                         merge_signals(active_signals, c.signals)
                     end
@@ -73,12 +68,12 @@ local function onTick(event)
             elseif transmitter.position ~= nil then -- workaround for game incorrectly thinking devices are invalid on load
                 rtest = game.surfaces["nauvis"].find_entity("skan-radio-transmitter-1", transmitter.position)
                 if rtest and rtest.valid then
-                    transmitter.transmitter = rtest
+                    transmitter.entity = rtest
                     --debugPrint("invalid transmitter 1 found")
                 else -- must do this for both types of transmitters
                     rtest = game.surfaces["nauvis"].find_entity("skan-radio-transmitter-2", transmitter.position)
                     if rtest and rtest.valid then
-                        transmitter.transmitter = rtest
+                        transmitter.entity = rtest
                         --debugPrint("invalid transmitter 2 found")
                     end
                 end
@@ -86,7 +81,7 @@ local function onTick(event)
         end
      end
      for _, receiver in pairs(global.skan_wireless_signals.receivers) do -- update receivers
-        if receiver.receiver.valid then
+        if receiver.entity.valid then
             local merged_state = {}
             local nearby_transmitters = findTransmittersInRange(receiver) -- find which transmitters are in range
             for __, transmitter in ipairs(nearby_transmitters) do -- get global signal tables from those transmitters
@@ -94,14 +89,14 @@ local function onTick(event)
             end
             local formatted = format_signals(merged_state)
             if #formatted > 0 then
-                receiver.receiver.get_control_behavior().parameters = { parameters = formatted }
+                receiver.entity.get_control_behavior().parameters = { parameters = formatted }
             else
-                receiver.receiver.get_control_behavior().parameters = nil -- there are no incoming signals, so zero out the output
+                receiver.entity.get_control_behavior().parameters = nil -- there are no incoming signals, so zero out the output
             end
          elseif receiver.position ~= nil then -- workaround for game sometimes losing track of devices on load
             rtest = game.surfaces["nauvis"].find_entity("skan-radio-receiver", receiver.position)
             if rtest and rtest.valid then
-                receiver.receiver = rtest
+                receiver.entity = rtest
                 -- debugPrint("invalid reciever found")
             end
         end
@@ -136,7 +131,7 @@ local function onPlaceEntity(event)
         entity.get_control_behavior().circuit_condition = signal_everything
         table.insert(global.skan_wireless_signals.transmitters,
         {
-            transmitter = entity,
+            entity = entity,
             range = 0, -- unlimited range
             channel = 1, -- future expansion
             signals = {parameters = {}},
@@ -146,7 +141,7 @@ local function onPlaceEntity(event)
         entity.operable = false
         table.insert(global.skan_wireless_signals.receivers, -- add the receiver to the global list
         {
-            receiver = entity,
+            entity = entity,
             channel = 1,
             position = entity.position
         })
@@ -157,14 +152,14 @@ local function onRemoveEntity(event) -- the removed device needs to be removed f
     local entity = event.entity
     if entity.name == "skan-radio-transmitter-1" or entity.name == "skan-radio-transmitter-2" then
         for i = 1, #global.skan_wireless_signals.transmitters do
-            if entity == global.skan_wireless_signals.transmitters[i].transmitter then
+            if entity == global.skan_wireless_signals.transmitters[i].entity then
                 table.remove(global.skan_wireless_signals.transmitters, i)
                 return
             end
         end
     elseif entity.name == "skan-radio-receiver" then
         for i = 1, #global.skan_wireless_signals.receivers do
-            if entity == global.skan_wireless_signals.receivers[i].receiver then
+            if entity == global.skan_wireless_signals.receivers[i].entity then
                 table.remove(global.skan_wireless_signals.receivers, i)
                 return
             end

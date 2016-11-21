@@ -6,5 +6,5 @@
   "contact": "",
   "homepage": "https://github.com/skandragon/skan-radio-telemetry",
   "description": "Adds radio equipment that can transmit circuit network signals over long distances.  All signal types are supported.",
-  "factorio_version": "0.14",
+  "factorio_version": "0.14"
 }
