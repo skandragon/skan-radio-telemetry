@@ -3,7 +3,7 @@ data:extend(
     {
         type = "lamp",
         name = "skan-radio-transmitter-1",
-        icon = "__skan-wireless-signals__/resources/icons/radio-transmitter-1.png",
+        icon = "__skan-radio-telemetry__/resources/icons/radio-transmitter-1.png",
         flags = {"placeable-neutral", "player-creation"},
         minable = {hardness = 0.2, mining_time = 0.75, result = "skan-radio-transmitter-1"},
         max_health = 125,
@@ -26,7 +26,7 @@ data:extend(
         },
         picture_off =
         {
-            filename = "__skan-wireless-signals__/resources/entity/radio-transmitter-1.png",
+            filename = "__skan-radio-telemetry__/resources/entity/radio-transmitter-1.png",
             priority = "high",
             width = 235,
             height = 207,
@@ -37,7 +37,7 @@ data:extend(
         },
         picture_on =
         {
-            filename = "__skan-wireless-signals__/resources/blank.png",
+            filename = "__skan-radio-telemetry__/resources/blank.png",
             priority = "high",
             width = 1,
             height = 1,
@@ -64,7 +64,7 @@ data:extend(
   {
         type = "lamp",
         name = "skan-radio-transmitter-2",
-        icon = "__skan-wireless-signals__/resources/icons/radio-transmitter-2.png",
+        icon = "__skan-radio-telemetry__/resources/icons/radio-transmitter-2.png",
         flags = {"placeable-neutral", "player-creation"},
         minable = {hardness = 0.2, mining_time = 0.75, result = "skan-radio-transmitter-2"},
         max_health = 125,
@@ -87,7 +87,7 @@ data:extend(
         },
         picture_off =
         {
-            filename = "__skan-wireless-signals__/resources/entity/radio-transmitter-2.png",
+            filename = "__skan-radio-telemetry__/resources/entity/radio-transmitter-2.png",
             priority = "high",
             width = 262,
             height = 228,
@@ -98,7 +98,7 @@ data:extend(
         },
         picture_on =
         {
-            filename = "__skan-wireless-signals__/resources/blank.png",
+            filename = "__skan-radio-telemetry__/resources/blank.png",
             priority = "high",
             width = 1,
             height = 1,
@@ -125,7 +125,7 @@ data:extend(
     {
         type = "constant-combinator",
         name = "skan-radio-receiver",
-        icon = "__skan-wireless-signals__/resources/icons/radio-receiver.png",
+        icon = "__skan-radio-telemetry__/resources/icons/radio-receiver.png",
         flags = {"placeable-neutral", "player-creation"},
         minable = {hardness = 0.2, mining_time = 0.75, result = "skan-radio-receiver"},
         max_health = 100,
@@ -146,7 +146,7 @@ data:extend(
         {
             north =
             {
-                filename = "__skan-wireless-signals__/resources/entity/radio-receiver.png",
+                filename = "__skan-radio-telemetry__/resources/entity/radio-receiver.png",
                 width = 203,
                 height = 179,
                 frame_count = 1,
@@ -154,7 +154,7 @@ data:extend(
             },
             east =
             {
-                filename = "__skan-wireless-signals__/resources/entity/radio-receiver.png",
+                filename = "__skan-radio-telemetry__/resources/entity/radio-receiver.png",
                 width = 203,
                 height = 179,
                 frame_count = 1,
@@ -162,7 +162,7 @@ data:extend(
             },
             south =
             {
-                filename = "__skan-wireless-signals__/resources/entity/radio-receiver.png",
+                filename = "__skan-radio-telemetry__/resources/entity/radio-receiver.png",
                 width = 203,
                 height = 179,
                 frame_count = 1,
@@ -170,7 +170,7 @@ data:extend(
             },
             west =
             {
-                filename = "__skan-wireless-signals__/resources/entity/radio-receiver.png",
+                filename = "__skan-radio-telemetry__/resources/entity/radio-receiver.png",
                 width = 203,
                 height = 179,
                 frame_count = 1,
@@ -181,28 +181,28 @@ data:extend(
         {
             north =
             {
-                filename = "__skan-wireless-signals__/resources/blank.png",
+                filename = "__skan-radio-telemetry__/resources/blank.png",
                 width = 1,
                 height = 1,
                 frame_count = 1
             },
             east =
             {
-                filename = "__skan-wireless-signals__/resources/blank.png",
+                filename = "__skan-radio-telemetry__/resources/blank.png",
                 width = 1,
                 height = 1,
                 frame_count = 1
             },
             south =
             {
-                filename = "__skan-wireless-signals__/resources/blank.png",
+                filename = "__skan-radio-telemetry__/resources/blank.png",
                 width = 1,
                 height = 1,
                 frame_count = 1
             },
             west =
             {
-                filename = "__skan-wireless-signals__/resources/blank.png",
+                filename = "__skan-radio-telemetry__/resources/blank.png",
                 width = 1,
                 height = 1,
                 frame_count = 1

@@ -3,7 +3,7 @@ data:extend(
 	{
 		type = "item",
 		name = "skan-radio-transmitter-1",
-		icon = "__skan-wireless-signals__/resources/icons/radio-transmitter-1.png",
+		icon = "__skan-radio-telemetry__/resources/icons/radio-transmitter-1.png",
 		flags = {"goes-to-quickbar"},
 		subgroup = "circuit-network",
 		order = "c[radio]-a[transmitter-1]",
@@ -13,7 +13,7 @@ data:extend(
 	{
 		type = "item",
 		name = "skan-radio-transmitter-2",
-		icon = "__skan-wireless-signals__/resources/icons/radio-transmitter-2.png",
+		icon = "__skan-radio-telemetry__/resources/icons/radio-transmitter-2.png",
 		flags = {"goes-to-quickbar"},
 		subgroup = "circuit-network",
 		order = "c[radio]-b[transmitter-2]",
@@ -23,7 +23,7 @@ data:extend(
 	{
 		type = "item",
 		name = "skan-radio-receiver",
-		icon = "__skan-wireless-signals__/resources/icons/radio-receiver.png",
+		icon = "__skan-radio-telemetry__/resources/icons/radio-receiver.png",
 		flags = {"goes-to-quickbar"},
 		subgroup = "circuit-network",
 		order = "c[radio]-d[receiver]",

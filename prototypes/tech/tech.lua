@@ -3,7 +3,7 @@ data:extend(
     {
         type = "technology",
         name = "skan-radio-telemetry",
-        icon = "__skan-wireless-signals__/resources/icons/telemetry.png",
+        icon = "__skan-radio-telemetry__/resources/icons/telemetry.png",
         effects =
         {
             {
@@ -32,7 +32,7 @@ data:extend(
     {
         type = "technology",
         name = "skan-radio-telemetry-2",
-        icon = "__skan-wireless-signals__/resources/icons/telemetry.png",
+        icon = "__skan-radio-telemetry__/resources/icons/telemetry.png",
         effects =
         {
             {
