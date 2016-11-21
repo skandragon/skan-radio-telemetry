@@ -1,3 +1,5 @@
+require "config"
+
 require "util"
 require "signal_processing"
 
@@ -49,7 +51,11 @@ local function findTransmittersInRange(receiver)
     return in_range
 end
 
-local tickFrequency = 60 / updatesPerSecond -- check tickFrequency/60 times per second
+local sanitizedUpdatesPerSecond = updatesPerSecond
+if sanitizedUpdatesPerSecond < 1 then sanitizedUpdatesPerSecond = 1 end
+if sanitizedUpdatesPerSecond > 60 then sanitizedUpdatesPerSecond = 60 end
+
+local tickFrequency = 60 / sanitizedUpdatesPerSecond -- check tickFrequency/60 times per second
 
 local function onTick(event)
     if ((event.tick % tickFrequency) ~= 0) then return end
