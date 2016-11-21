@@ -1,9 +1,12 @@
-Wireless Signals
-v-0.1.0
-Author: ItsTheKais  ( kaiseryoshi@gmail.com )
+Skan's Radio Telemetry version 1.0.0
+Author: Skandragon (http://github.com/skandragon)
 
-A Factorio mod about using radios for fun and profit.
+A Factorio mod which transmits signals (telemetry) over long distances.
 
+This mod includes two transmitter types and a receiver.  All signals
+may be used with either transmitter, although the range of the smaller one is limited, as is its power consumption.
+
+Derived from work by: ItsTheKais  ( kaiseryoshi@gmail.com ) (wireless-signals)
 
 License information:
 

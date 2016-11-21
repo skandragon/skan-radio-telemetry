@@ -9,15 +9,6 @@ local wire_colors =
     defines.wire_type.green
 }
 
-local function debugPrint(string)
-    local p = game.players[1]
-    p.print(string)
-end
-
-local function onInit()
-    init_global()
-end
-
 local function init_global()
     if not global.skan_wireless_signals then
         if not global.skan_wireless_signals then
@@ -27,6 +18,15 @@ local function init_global()
             global.wireless_signals = nil
         end
     end
+end
+
+local function debugPrint(string)
+    local p = game.players[1]
+    p.print(string)
+end
+
+local function onInit()
+    init_global()
 end
 
 local function onConfigChange(data)

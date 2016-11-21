@@ -2,8 +2,8 @@ data:extend(
 {
     {
         type = "technology",
-        name = "skan-wireless-telemetry",
-        icon = "__skan_wireless-signals__/resources/icons/telemetry.png",
+        name = "skan-radio-telemetry",
+        icon = "__skan-wireless-signals__/resources/icons/telemetry.png",
         effects =
         {
             {
@@ -31,8 +31,8 @@ data:extend(
     },
     {
         type = "technology",
-        name = "skan-wireless-telemetry-2",
-        icon = "__skan_wireless-signals__/resources/icons/telemetry.png",
+        name = "skan-radio-telemetry-2",
+        icon = "__skan-wireless-signals__/resources/icons/telemetry.png",
         effects =
         {
             {
@@ -40,7 +40,7 @@ data:extend(
                 recipe = "skan-radio-transmitter-2"
             },
         },
-        prerequisites = {"skan-telemetry", "effectivity-module-2"},
+        prerequisites = {"skan-radio-telemetry", "effectivity-module-2"},
         unit =
         {
             count = 100,
