@@ -125,7 +125,7 @@ local function onPlaceEntity(event)
         entity.get_control_behavior().circuit_condition = signal_everything
         table.insert(global.skan_wireless_signals.transmitters, -- add the transmitter to the global list
         {
-            transmitter = entity,
+            entity = entity,
             range = 3000, -- how far the transmitter can broadcast
             channel = 1, -- future expansion
             signals = {parameters = {}}, -- the actual signals, will be dynamically updated in OnTick
