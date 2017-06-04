@@ -8,6 +8,16 @@ local function debugPrint(string)
     p(string)
 end
 
+function printOnce(id, msg)
+    if not global.skan_wireless_signals.print_once then
+        global.skan_wireless_signals.print_once = {}
+    end
+    if not global.skan_wireless_signals.print_once[id] then
+        global.skan_wireless_signals.print_once[id] = true
+        debugPrint(msg)
+    end
+end
+
 function merge_signals(state, signals)
     for _,signal in ipairs(signals) do
         local key = signal.signal.type .. ":" .. signal.signal.name
@@ -32,14 +42,19 @@ function merge_state(state, a)
     end
 end
 
-function format_signals(state)
+function format_signals(state, maxcount)
     local signals = {}
     local index = 1
     for _,signal in pairs(state) do
         signal.index = index
+        if index <= maxcount then
+            --debugPrint("Formatting: " .. signal.signal.name)
+            table.insert(signals, signal)
+        else
+            printOnce("maxsignals",
+                "More than " .. maxcount .. " signals sent into a transmitter.  Random signals will propagate.")
+        end
         index = index + 1
-        --debugPrint("Formatting: " .. signal.signal.name)
-        table.insert(signals, signal)
     end
     return signals
 end

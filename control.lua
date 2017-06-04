@@ -13,13 +13,8 @@ local wire_colors =
 
 local function init_global()
     if not global.skan_wireless_signals then
-        global.skan_wireless_signals = {transmitters = {}, receivers = {}}
+        global.skan_wireless_signals = {transmitters = {}, receivers = {}, print_once = {}}
     end
-end
-
-local function debugPrint(string)
-    local p = game.players[1]
-    p.print(string)
 end
 
 local function onInit()
@@ -66,7 +61,7 @@ local function onTick(event)
                 local active_signals = {}
                 for i = 1, #wire_colors do -- check both red and green wires
                     local c = transmitter.entity.get_circuit_network(wire_colors[i])
-                    if c then
+                    if c and c.signals then
                         merge_signals(active_signals, c.signals)
                     end
                 end
@@ -93,7 +88,7 @@ local function onTick(event)
             for __, transmitter in ipairs(nearby_transmitters) do -- get global signal tables from those transmitters
                 merge_state(merged_state, transmitter.signals.parameters)
             end
-            local formatted = format_signals(merged_state)
+            local formatted = format_signals(merged_state, receiver.entity.get_control_behavior().signals_count)
             if #formatted > 0 then
                 receiver.entity.get_control_behavior().parameters = { parameters = formatted }
             else
@@ -145,6 +140,7 @@ local function onPlaceEntity(event)
         })
     elseif entity.name == "skan-radio-receiver" then
         entity.operable = false
+        entity.get_or_create_control_behavior().parameters = nil
         table.insert(global.skan_wireless_signals.receivers, -- add the receiver to the global list
         {
             entity = entity,
