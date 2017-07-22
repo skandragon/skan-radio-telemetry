@@ -4,6 +4,7 @@ data:extend(
         type = "technology",
         name = "skan-radio-telemetry",
         icon = "__skan-radio-telemetry__/resources/icons/telemetry.png",
+        icon_size = 128,
         effects =
         {
             {
@@ -33,6 +34,7 @@ data:extend(
         type = "technology",
         name = "skan-radio-telemetry-2",
         icon = "__skan-radio-telemetry__/resources/icons/telemetry.png",
+        icon_size = 128,
         effects =
         {
             {
