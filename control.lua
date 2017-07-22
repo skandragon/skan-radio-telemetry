@@ -3,7 +3,8 @@ require "config"
 require "util"
 require "signal_processing"
 
-local mod_version = "1.0.0"
+local mod_version = "1.1.3"
+local mod_data_version = "1.1.3"
 
 local wire_colors =
 {
@@ -12,6 +13,9 @@ local wire_colors =
 }
 
 local function init_global()
+    global.version = mod_version
+    global.data_version = mod_data_version
+
     if not global.skan_wireless_signals then
         global.skan_wireless_signals = {transmitters = {}, receivers = {}, print_once = {}}
     end
@@ -21,12 +25,17 @@ local function onInit()
     init_global()
 end
 
+local function checkForMigration(old_version, new_version)
+  -- TODO: when a migration is necessary, trigger it here or set a flag.
+end
+
+local function checkForDataMigration(old_data_version, new_data_version)
+  -- TODO: when a migration is necessary, trigger it here or set a flag.
+end
+
 local function onConfigChange(data)
-    if data.mod_changes and data.mod_changes["skan-wireless-signals"] then
-        if not data.mod_changes["skan-wireless-signals"].old_version then -- mod added to existing save
-            init_global()
-        end
-    end
+    checkForMigration(global.version, mod_version)
+    checkForDataMigration(global.data_version, mod_data_version)
 end
 
 local function near(transmitter, receiver)
@@ -46,14 +55,14 @@ local function findTransmittersInRange(receiver)
     return in_range
 end
 
-local sanitizedUpdatesPerSecond = updatesPerSecond
-if sanitizedUpdatesPerSecond < 1 then sanitizedUpdatesPerSecond = 1 end
-if sanitizedUpdatesPerSecond > 60 then sanitizedUpdatesPerSecond = 60 end
+local updatesPerSecond = 10
 
-local tickFrequency = 60 / sanitizedUpdatesPerSecond -- check tickFrequency/60 times per second
+
+local tickFrequency = 60 / updatesPerSecond
 
 local function onTick(event)
-    if ((event.tick % tickFrequency) ~= 0) then return end
+    if ((event.tick % tickFrequency) > 0) then return end
+    debugPrint("Tick!")
 
     for k, transmitter in pairs(global.skan_wireless_signals.transmitters) do -- update transmitters
         if transmitter.entity.valid then

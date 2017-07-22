@@ -1,4 +1,4 @@
-local function debugPrint(string)
+function debugPrint(string)
     local p
     if game and game.players[1] then
         p = game.players[1].print
