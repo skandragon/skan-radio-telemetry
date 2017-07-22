@@ -62,7 +62,6 @@ local tickFrequency = 60 / updatesPerSecond
 
 local function onTick(event)
     if ((event.tick % tickFrequency) > 0) then return end
-    debugPrint("Tick!")
 
     for k, transmitter in pairs(global.skan_wireless_signals.transmitters) do -- update transmitters
         if transmitter.entity.valid then
