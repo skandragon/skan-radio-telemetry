@@ -184,7 +184,7 @@ script.on_configuration_changed(onConfigChange)
 script.on_event(defines.events.on_built_entity, onPlaceEntity)
 script.on_event(defines.events.on_robot_built_entity, onPlaceEntity)
 
-script.on_event(defines.events.on_preplayer_mined_item, onRemoveEntity)
+script.on_event(defines.events.on_pre_player_mined_item, onRemoveEntity)
 script.on_event(defines.events.on_robot_pre_mined, onRemoveEntity)
 script.on_event(defines.events.on_entity_died, onRemoveEntity)
 
